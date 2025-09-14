@@ -3,6 +3,16 @@
 # Script de inicialização para KnightBot-MD
 echo "Iniciando KnightBot-MD..."
 
+# Detecta se está rodando no Termux
+if [ -d "/data/data/com.termux/files/usr" ]; then
+    echo "Ambiente Termux detectado!"
+    # Verifica se as dependências do Termux estão instaladas
+    if ! command -v ffmpeg &> /dev/null || ! command -v convert &> /dev/null; then
+        echo "Algumas dependências estão faltando. Execute termux-setup.sh primeiro."
+        exit 1
+    fi
+fi
+
 # Verifica se o Node.js está instalado
 if ! command -v node &> /dev/null; then
     echo "Node.js não encontrado. Por favor, instale o Node.js para continuar."
